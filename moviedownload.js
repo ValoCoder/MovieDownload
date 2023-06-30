@@ -1,17 +1,30 @@
-const searchInput = document.getElementById('search-input');
-const blogPosts = document.getElementById('blog-posts').getElementsByClassName('blog-post');
+// moviedownload.js
 
-searchInput.addEventListener('input', function() {
-  const searchText = searchInput.value.toLowerCase();
+function showCategoryContent(category) {
+  const categoryContent = document.getElementById(category);
+  const allCategoryContents = document.getElementsByClassName('category-content');
+
+  for (let i = 0; i < allCategoryContents.length; i++) {
+    allCategoryContents[i].style.display = 'none';
+  }
+
+  if (categoryContent) {
+    categoryContent.style.display = 'block';
+  }
+}
+
+function searchBlogPosts() {
+  const searchInput = document.getElementById('search-input').value.toLowerCase();
+  const blogPosts = document.getElementsByClassName('blog-post');
 
   for (let i = 0; i < blogPosts.length; i++) {
-    const blogPost = blogPosts[i];
-    const title = blogPost.querySelector('h2').textContent.toLowerCase();
+    const blogPostTitle = blogPosts[i].querySelector('.blog-post-title').textContent.toLowerCase();
 
-    if (title.includes(searchText)) {
-      blogPost.style.display = 'block';
+    if (blogPostTitle.includes(searchInput)) {
+      blogPosts[i].style.display = 'block';
     } else {
-      blogPost.style.display = 'none';
+      blogPosts[i].style.display = 'none';
     }
   }
-});
+}
+
